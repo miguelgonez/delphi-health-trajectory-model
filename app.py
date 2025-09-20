@@ -25,7 +25,7 @@ from evaluate_auc import evaluate_model
 
 # Set page config
 st.set_page_config(
-    page_title="Delphi - Health Trajectory Modeling",
+    page_title="Delphi - Modelado de Trayectorias de Salud",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -42,14 +42,14 @@ if 'training_complete' not in st.session_state:
     st.session_state.training_complete = False
 
 # Main title
-st.title("🏥 Delphi: Health Trajectory Modeling with Generative Transformers")
+st.title("🏥 Delphi: Modelado de Trayectorias de Salud con Transformadores Generativos")
 st.markdown("---")
 
 # Sidebar navigation
-st.sidebar.title("Navigation")
+st.sidebar.title("Navegación")
 page = st.sidebar.selectbox(
-    "Choose a page:",
-    ["Overview", "Data Upload", "Model Training", "Trajectory Analysis", "Risk Prediction", "Model Interpretability", "Performance Metrics"]
+    "Elige una página:",
+    ["Resumen", "Subir Datos", "Entrenamiento", "Análisis de Trayectorias", "Predicción de Riesgos", "Interpretabilidad", "Métricas de Rendimiento"]
 )
 
 # Load disease labels
@@ -72,69 +72,69 @@ def load_disease_labels():
         return synthetic_labels
 
 # Overview page
-if page == "Overview":
-    st.header("🔬 About Delphi")
+if page == "Resumen":
+    st.header("🔬 Acerca de Delphi")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
         st.markdown("""
-        **Delphi** is a generative transformer model designed to analyze and predict human health trajectories. 
-        Based on a modified GPT-2 architecture, Delphi learns the natural history of human disease from health records.
+        **Delphi** es un modelo de transformador generativo diseñado para analizar y predecir trayectorias de salud humana. 
+        Basado en una arquitectura GPT-2 modificada, Delphi aprende la historia natural de las enfermedades humanas a partir de registros médicos.
         
-        ### Key Features:
-        - **Generative Modeling**: Uses transformer architecture to model disease progression sequences
-        - **Risk Prediction**: Predicts future disease events with calibrated probabilities
-        - **Interpretability**: Provides attention mechanisms and SHAP analysis for model understanding
-        - **Trajectory Visualization**: Interactive plotting of patient health timelines
-        - **Performance Analysis**: Comprehensive evaluation metrics and calibration plots
+        ### Características Principales:
+        - **Modelado Generativo**: Utiliza arquitectura transformer para modelar secuencias de progresión de enfermedades
+        - **Predicción de Riesgos**: Predice futuros eventos de enfermedad con probabilidades calibradas
+        - **Interpretabilidad**: Proporciona mecanismos de atención y análisis SHAP para la comprensión del modelo
+        - **Visualización de Trayectorias**: Gráficos interactivos de líneas de tiempo de salud del paciente
+        - **Análisis de Rendimiento**: Métricas de evaluación integral y gráficos de calibración
         
-        ### Research Background:
-        This implementation is based on the paper "Learning the natural history of human disease with generative transformers" 
-        by Shmatko et al., trained on UK Biobank data containing 400K patient health trajectories.
+        ### Antecedentes de Investigación:
+        Esta implementación se basa en el artículo "Learning the natural history of human disease with generative transformers" 
+        de Shmatko et al., entrenado con datos del UK Biobank que contienen 400K trayectorias de salud de pacientes.
         """)
     
     with col2:
         st.info("""
-        **Model Architecture:**
-        - Modified GPT-2 transformer
-        - 2M parameters (Delphi-2M)
-        - Disease event sequences as input
-        - Time-aware embeddings
-        - Attention-based predictions
+        **Arquitectura del Modelo:**
+        - Transformador GPT-2 modificado
+        - 2M parámetros (Delphi-2M)
+        - Secuencias de eventos de enfermedad como entrada
+        - Embeddings conscientes del tiempo
+        - Predicciones basadas en atención
         """)
     
     # Model statistics
-    st.subheader("📊 Model Statistics")
+    st.subheader("📊 Estadísticas del Modelo")
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("Parameters", "2M", help="Total model parameters")
+        st.metric("Parámetros", "2M", help="Parámetros totales del modelo")
     with col2:
-        st.metric("Diseases", "15", help="Number of disease categories")
+        st.metric("Enfermedades", "66", help="Número de categorías de enfermedades")
     with col3:
-        st.metric("Max Sequence", "512", help="Maximum sequence length")
+        st.metric("Secuencia Máx", "512", help="Longitud máxima de secuencia")
     with col4:
-        st.metric("Training Time", "~10min", help="On single GPU")
+        st.metric("Tiempo Entren", "~10min", help="En una sola GPU")
 
 # Data Upload page
-elif page == "Data Upload":
-    st.header("📁 Data Upload and Processing")
+elif page == "Subir Datos":
+    st.header("📁 Subir y Procesar Datos")
     
     st.markdown("""
-    Upload your health trajectory data in CSV format. The data should contain patient sequences 
-    with disease events and timestamps.
+    Sube tus datos de trayectorias de salud en formato CSV. Los datos deben contener secuencias de pacientes 
+    con eventos de enfermedad y marcas de tiempo.
     """)
     
     # File upload
     uploaded_file = st.file_uploader(
-        "Choose a CSV file",
+        "Elige un archivo CSV",
         type="csv",
-        help="Upload health trajectory data in CSV format"
+        help="Sube datos de trayectorias de salud en formato CSV"
     )
     
     # Use synthetic data option
-    use_synthetic = st.checkbox("Use synthetic UK Biobank-style data", value=True)
+    use_synthetic = st.checkbox("Usar datos sintéticos estilo UK Biobank", value=True)
     
     if use_synthetic or uploaded_file is not None:
         try:
@@ -142,79 +142,79 @@ elif page == "Data Upload":
                 # Load synthetic data
                 synthetic_data = pd.read_csv('data/synthetic_data.csv')
                 data = synthetic_data
-                st.success("✅ Synthetic data loaded successfully!")
+                st.success("✅ ¡Datos sintéticos cargados exitosamente!")
             else:
                 data = pd.read_csv(uploaded_file)
-                st.success("✅ Data uploaded successfully!")
+                st.success("✅ ¡Datos subidos exitosamente!")
             
             st.session_state.data_loaded = True
             st.session_state.raw_data = data
             
             # Display data preview
-            st.subheader("📋 Data Preview")
+            st.subheader("📋 Vista Previa de Datos")
             st.dataframe(data.head(10))
             
             # Data statistics
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("Total Patients", len(data['patient_id'].unique()) if 'patient_id' in data.columns else len(data))
+                st.metric("Pacientes Totales", len(data['patient_id'].unique()) if 'patient_id' in data.columns else len(data))
             with col2:
-                st.metric("Total Events", len(data) if 'event_date' in data.columns else "N/A")
+                st.metric("Eventos Totales", len(data) if 'event_date' in data.columns else "N/A")
             with col3:
-                st.metric("Data Columns", len(data.columns))
+                st.metric("Columnas de Datos", len(data.columns))
             
             # Data preprocessing
-            st.subheader("🔧 Data Preprocessing")
-            if st.button("Process Data for Training"):
-                with st.spinner("Processing data..."):
+            st.subheader("🔧 Preprocesamiento de Datos")
+            if st.button("Procesar Datos para Entrenamiento"):
+                with st.spinner("Procesando datos..."):
                     # Process the data
                     processed_data, ages_data, dates_data = prepare_data(data)
                     st.session_state.processed_data = processed_data
                     st.session_state.ages_data = ages_data
                     st.session_state.dates_data = dates_data
-                    st.success("✅ Data processed successfully!")
+                    st.success("✅ ¡Datos procesados exitosamente!")
                     
                     # Show processed data sample
-                    st.write("Processed sequences sample:")
-                    st.write(f"Sequences: {processed_data[:3]}")
-                    st.write(f"Ages: {ages_data[:3]}")
-                    st.write(f"Dates: {dates_data[:3]}")
+                    st.write("Muestra de secuencias procesadas:")
+                    st.write(f"Secuencias: {processed_data[:3]}")
+                    st.write(f"Edades: {ages_data[:3]}")
+                    st.write(f"Fechas: {dates_data[:3]}")
             
         except Exception as e:
-            st.error(f"❌ Error loading data: {str(e)}")
+            st.error(f"❌ Error cargando datos: {str(e)}")
     
     else:
-        st.info("👆 Please upload a CSV file or use synthetic data to continue.")
+        st.info("👆 Por favor sube un archivo CSV o usa datos sintéticos para continuar.")
 
 # Model Training page
-elif page == "Model Training":
-    st.header("🚀 Model Training")
+elif page == "Entrenamiento":
+    st.header("🚀 Entrenamiento del Modelo")
     
     if not st.session_state.data_loaded:
-        st.warning("⚠️ Please upload and process data first in the Data Upload page.")
+        st.warning("⚠️ Por favor sube y procesa los datos primero en la página de Subir Datos.")
     else:
-        st.success("✅ Data is ready for training!")
+        st.success("✅ ¡Los datos están listos para entrenamiento!")
         
         # Training configuration
-        st.subheader("⚙️ Training Configuration")
+        st.subheader("⚙️ Configuración de Entrenamiento")
         col1, col2 = st.columns(2)
         
         with col1:
-            epochs = st.slider("Number of Epochs", 1, 50, 10)
-            batch_size = st.selectbox("Batch Size", [8, 16, 32, 64], index=1)
-            learning_rate = st.selectbox("Learning Rate", [1e-4, 5e-4, 1e-3, 5e-3], index=1)
+            epochs = st.slider("Número de Épocas", 1, 50, 10)
+            batch_size = st.selectbox("Tamaño de Lote", [8, 16, 32, 64], index=1)
+            learning_rate = st.selectbox("Tasa de Aprendizaje", [1e-4, 5e-4, 1e-3, 5e-3], index=1)
         
         with col2:
-            max_seq_len = st.slider("Max Sequence Length", 64, 512, 256)
-            n_layers = st.slider("Number of Layers", 4, 12, 6)
-            n_heads = st.selectbox("Attention Heads", [4, 8, 12], index=1)
+            max_seq_len = st.slider("Longitud Máxima de Secuencia", 64, 512, 256)
+            n_layers = st.slider("Número de Capas", 4, 12, 6)
+            n_heads = st.selectbox("Cabezas de Atención", [4, 8, 12], index=1)
         
         # Training button
-        if st.button("🚀 Start Training", type="primary"):
+        if st.button("🚀 Comenzar Entrenamiento", type="primary"):
             if 'processed_data' not in st.session_state:
-                st.error("❌ Please process the data first!")
+                st.error("❌ ¡Por favor procesa los datos primero!")
             else:
-                with st.spinner("Training model... This may take several minutes."):
+                with st.spinner("Entrenando modelo... Esto puede tomar varios minutos."):
                     progress_bar = st.progress(0)
                     status_text = st.empty()
                     
@@ -253,59 +253,59 @@ elif page == "Model Training":
                         st.session_state.training_complete = True
                         
                         progress_bar.progress(1.0)
-                        status_text.text("Training completed!")
-                        st.success("🎉 Model trained successfully!")
+                        status_text.text("¡Entrenamiento completado!")
+                        st.success("🎉 ¡Modelo entrenado exitosamente!")
                         
                         # Plot training loss
                         fig, ax = plt.subplots(figsize=(10, 6))
                         ax.plot(training_losses)
-                        ax.set_xlabel('Epoch')
-                        ax.set_ylabel('Loss')
-                        ax.set_title('Training Loss')
+                        ax.set_xlabel('Época')
+                        ax.set_ylabel('Pérdida')
+                        ax.set_title('Pérdida de Entrenamiento')
                         ax.grid(True)
                         st.pyplot(fig)
                         
                     except Exception as e:
-                        st.error(f"❌ Training failed: {str(e)}")
+                        st.error(f"❌ Entrenamiento fallido: {str(e)}")
         
         # Display training status
         if st.session_state.training_complete:
-            st.success("✅ Model training completed!")
+            st.success("✅ ¡Entrenamiento del modelo completado!")
             
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("Final Loss", f"{st.session_state.training_losses[-1]:.4f}")
+                st.metric("Pérdida Final", f"{st.session_state.training_losses[-1]:.4f}")
             with col2:
-                st.metric("Epochs Trained", len(st.session_state.training_losses))
+                st.metric("Épocas Entrenadas", len(st.session_state.training_losses))
             with col3:
-                st.metric("Model Parameters", "~2M")
+                st.metric("Parámetros del Modelo", "~2M")
 
 # Trajectory Analysis page
-elif page == "Trajectory Analysis":
-    st.header("📈 Patient Trajectory Analysis")
+elif page == "Análisis de Trayectorias":
+    st.header("📈 Análisis de Trayectorias de Pacientes")
     
     if not st.session_state.training_complete:
-        st.warning("⚠️ Please train the model first.")
+        st.warning("⚠️ Por favor entrena el modelo primero.")
     else:
-        st.success("✅ Model ready for trajectory analysis!")
+        st.success("✅ ¡Modelo listo para análisis de trayectorias!")
         
         # Load disease labels for visualization
         disease_labels = load_disease_labels()
         
         # Patient selection
-        st.subheader("👤 Select Patient for Analysis")
+        st.subheader("👤 Seleccionar Paciente para Análisis")
         
         if 'processed_data' in st.session_state:
             # Get unique patient IDs
             patient_ids = list(range(min(100, len(st.session_state.processed_data))))
-            selected_patient = st.selectbox("Patient ID", patient_ids)
+            selected_patient = st.selectbox("ID de Paciente", patient_ids)
             
-            if st.button("📊 Analyze Trajectory"):
+            if st.button("📊 Analizar Trayectoria"):
                 # Get patient data
                 patient_sequence = st.session_state.processed_data[selected_patient]
                 
                 # Create timeline visualization
-                st.subheader(f"🕒 Timeline for Patient {selected_patient}")
+                st.subheader(f"🕒 Línea de Tiempo para Paciente {selected_patient}")
                 
                 # Convert sequence to actual patient trajectory using unified mapping
                 disease_codes = [code for code in patient_sequence if code != 0]  # Remove padding
@@ -337,9 +337,9 @@ elif page == "Trajectory Analysis":
                     ))
                 
                 fig.update_layout(
-                    title=f"Health Trajectory for Patient {selected_patient}",
-                    xaxis_title="Age (years)",
-                    yaxis_title="Disease Events",
+                    title=f"Trayectoria de Salud para Paciente {selected_patient}",
+                    xaxis_title="Edad (años)",
+                    yaxis_title="Eventos de Enfermedad",
                     height=400,
                     showlegend=False
                 )
@@ -347,16 +347,16 @@ elif page == "Trajectory Analysis":
                 st.plotly_chart(fig, use_container_width=True)
                 
                 # Disease progression analysis
-                st.subheader("🔍 Disease Progression Analysis")
+                st.subheader("🔍 Análisis de Progresión de Enfermedades")
                 
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.write("**Disease Onset Ages:**")
+                    st.write("**Edades de Inicio de Enfermedades:**")
                     progression_df = pd.DataFrame({
                         'Disease': disease_names,
                         'Age at Onset': ages.round(1),
-                        'Years from First Event': (ages - ages[0]).round(1)
+                        'Años desde Primer Evento': (ages - ages[0]).round(1)
                     })
                     st.dataframe(progression_df)
                 
@@ -367,16 +367,16 @@ elif page == "Trajectory Analysis":
                         x='Years from First Event',
                         y='Disease',
                         orientation='h',
-                        title="Disease Progression Timeline"
+                        title="Línea de Tiempo de Progresión de Enfermedades"
                     )
                     st.plotly_chart(fig_timeline, use_container_width=True)
         
         # Trajectory comparison
-        st.subheader("🔄 Trajectory Comparison")
+        st.subheader("🔄 Comparación de Trayectorias")
         
         num_patients = st.slider("Number of patients to compare", 2, 10, 3)
         
-        if st.button("📊 Compare Trajectories"):
+        if st.button("📊 Comparar Trayectorias"):
             # Generate comparison visualization
             fig = make_subplots(
                 rows=num_patients, cols=1,
@@ -418,7 +418,7 @@ elif page == "Trajectory Analysis":
                 )
             
             fig.update_layout(
-                title="Patient Trajectory Comparison",
+                title="Comparación de Trayectorias de Pacientes",
                 height=150*num_patients,
                 xaxis_title="Age (years)"
             )
@@ -426,27 +426,27 @@ elif page == "Trajectory Analysis":
             st.plotly_chart(fig, use_container_width=True)
 
 # Risk Prediction page
-elif page == "Risk Prediction":
-    st.header("🎯 Disease Risk Prediction")
+elif page == "Predicción de Riesgos":
+    st.header("🎯 Predicción de Riesgo de Enfermedades")
     
     if not st.session_state.training_complete:
-        st.warning("⚠️ Please train the model first.")
+        st.warning("⚠️ Por favor entrena el modelo primero.")
     else:
-        st.success("✅ Model ready for risk prediction!")
+        st.success("✅ ¡Modelo listo para predicción de riesgos!")
         
         disease_labels = load_disease_labels()
         
         # Risk prediction interface
-        st.subheader("🔮 Generate Risk Predictions")
+        st.subheader("🔮 Generar Predicciones de Riesgo")
         
         col1, col2 = st.columns([1, 2])
         
         with col1:
-            st.write("**Patient Information:**")
-            age = st.slider("Current Age", 18, 100, 50)
-            sex = st.selectbox("Sex", ["Male", "Female"])
+            st.write("**Información del Paciente:**")
+            age = st.slider("Edad Actual", 18, 100, 50)
+            sex = st.selectbox("Sexo", ["Masculino", "Femenino"])
             
-            st.write("**Existing Conditions:**")
+            st.write("**Condiciones Existentes:**")
             # Get available diseases from tokenizer
             tokenizer = get_tokenizer()
             available_disease_names = tokenizer.get_disease_names()
@@ -458,15 +458,15 @@ elif page == "Risk Prediction":
             )
             
             prediction_horizon = st.selectbox(
-                "Prediction Horizon",
-                ["1 year", "5 years", "10 years", "Lifetime"],
+                "Horizonte de Predicción",
+                ["1 año", "5 años", "10 años", "Toda la vida"],
                 index=1
             )
         
         with col2:
-            if st.button("🎯 Generate Predictions", type="primary"):
+            if st.button("🎯 Generar Predicciones", type="primary"):
                 # Generate risk predictions using trained model
-                st.subheader(f"📊 Risk Predictions - {prediction_horizon}")
+                st.subheader(f"📊 Predicciones de Riesgo - {prediction_horizon}")
                 
                 # Create input sequence from existing conditions using unified mapping
                 disease_mapping = get_disease_mapping()
@@ -569,7 +569,7 @@ elif page == "Risk Prediction":
                     risk_df = risk_df.sort_values('Risk Score', ascending=False)
                     
                     # Display top risks
-                    st.write("**Top 10 Disease Risks:**")
+                    st.write("**Top 10 Riesgos de Enfermedades:**")
                     top_risks = risk_df.head(10)
                     
                     # Create risk visualization
@@ -594,7 +594,7 @@ elif page == "Risk Prediction":
                     st.dataframe(top_risks[['Disease', 'Risk Percentage', 'Risk Category']])
                     
                     # Risk factors explanation
-                    st.subheader("📝 Risk Factors Considered")
+                    st.subheader("📝 Factores de Riesgo Considerados")
                     st.write(f"""
                     **Age:** {age} years (Age factor: {age_factor:.2f})
                     **Existing Conditions:** {len(existing_conditions)} conditions (Comorbidity factor: {comorbidity_factor:.2f})
@@ -682,13 +682,13 @@ elif page == "Risk Prediction":
             st.plotly_chart(fig, use_container_width=True)
 
 # Model Interpretability page
-elif page == "Model Interpretability":
+elif page == "Interpretabilidad":
     st.header("🔍 Model Interpretability")
     
     if not st.session_state.training_complete:
-        st.warning("⚠️ Please train the model first.")
+        st.warning("⚠️ Por favor entrena el modelo primero.")
     else:
-        st.success("✅ Model ready for interpretability analysis!")
+        st.success("✅ ¡Modelo listo para análisis de interpretabilidad!")
         
         # Attention analysis
         st.subheader("👁️ Attention Mechanism Analysis")
@@ -821,13 +821,13 @@ elif page == "Model Interpretability":
             st.metric("Context Length", "256", help="Maximum sequence length")
 
 # Performance Metrics page
-elif page == "Performance Metrics":
+elif page == "Métricas de Rendimiento":
     st.header("📊 Model Performance Metrics")
     
     if not st.session_state.training_complete:
-        st.warning("⚠️ Please train the model first.")
+        st.warning("⚠️ Por favor entrena el modelo primero.")
     else:
-        st.success("✅ Model ready for performance evaluation!")
+        st.success("✅ ¡Modelo listo para evaluación de rendimiento!")
         
         # Performance overview
         st.subheader("📈 Performance Overview")

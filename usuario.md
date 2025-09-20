@@ -6,9 +6,13 @@ Imagina que tienes una bola de cristal que puede predecir qué enfermedades podr
 
 **🏥 Delphi maneja más de 65 enfermedades diferentes** de todas las especialidades médicas principales: desde enfermedades cardiovasculares y diabetes hasta cáncer, trastornos neurológicos, enfermedades respiratorias, y condiciones de salud mental.
 
+**🌐 Interfaz Completamente en Español**: La aplicación ha sido completamente traducida al español, incluyendo todos los menús, botones, mensajes y opciones de configuración para una experiencia completamente localizada.
+
 Delphi es como un médico muy sabio que ha visto millones de casos similares al tuyo y puede decirte: "Basándome en pacientes parecidos a ti, es probable que desarrolles X condición en los próximos 5 años con un 15% de probabilidad."
 
 ## 🚀 Cómo Empezar
+
+**🌐 Aplicación Completamente en Español**: Toda la interfaz ha sido traducida al español, incluyendo navegación, botones, formularios y mensajes. Verás todas las opciones en tu idioma nativo.
 
 ### Accediendo a la Aplicación
 1. Abre tu navegador web
