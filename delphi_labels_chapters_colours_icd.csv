@@ -1,0 +1,67 @@
+disease_code,disease_name,icd_code,icd_chapter,color,prevalence,description
+1,Hypertension,I10,Chapter I,#9e734a,0.45,Essential (primary) hypertension
+2,Coronary Artery Disease,I25,Chapter I,#2a2794,0.18,Chronic ischemic heart disease
+3,Heart Failure,I50,Chapter I,#37b6fb,0.14,Heart failure
+4,Atrial Fibrillation,I48,Chapter I,#9d8977,0.17,Atrial fibrillation and flutter
+5,Type 2 Diabetes,E11,Chapter E,#aa292e,0.11,Type 2 diabetes mellitus
+6,Type 1 Diabetes,E10,Chapter E,#1e12aa,0.02,Type 1 diabetes mellitus
+7,Hyperlipidemia,E78,Chapter E,#c28e28,0.35,Disorders of lipoprotein metabolism and other lipidemias
+8,Obesity,E66,Chapter E,#744f7b,0.32,Overweight and obesity
+9,Depression,F32,Chapter F,#1407c9,0.26,"Major depressive disorder, single episode"
+10,Anxiety,F41,Chapter F,#f86e50,0.31,Other anxiety disorders
+11,Schizophrenia,F20,Chapter F,#11c4e6,0.01,Schizophrenia
+12,Autism Spectrum Disorders,F84,Chapter F,#35b4bd,0.015,Pervasive developmental disorders
+13,Asthma,J45,Chapter J,#46f0a8,0.13,Asthma
+14,COPD,J44,Chapter J,#7a6af3,0.16,Other chronic obstructive pulmonary disease
+15,Upper Respiratory Infections,J06,Chapter J,#841377,0.25,Acute upper respiratory infections of multiple and unspecified sites
+16,Arthritis,M79,Chapter M,#3fcc59,0.23,"Other and unspecified soft tissue disorders, not elsewhere classified"
+17,Osteoporosis,M80,Chapter M,#a359e8,0.19,Osteoporosis with current pathological fracture
+18,Back Pain,M54,Chapter M,#d831ee,0.4,Dorsalgia
+19,Cancer (general),C78,Chapter C,#8c2b6f,0.38,Secondary malignant neoplasm of respiratory and digestive organs
+20,Breast Cancer,C50,Chapter C,#3afc46,0.08,Malignant neoplasm of breast
+21,Lung Cancer,C34,Chapter C,#8cd24a,0.04,Malignant neoplasm of bronchus and lung
+22,Colorectal Cancer,C18,Chapter C,#87112e,0.05,Malignant neoplasm of colon
+23,Kidney Disease,N18,Chapter N,#38b470,0.15,Chronic kidney disease (CKD)
+24,Prostate Disease,N40,Chapter N,#62d161,0.2,Benign prostatic hyperplasia
+25,Pelvic Organ Prolapse,N81,Chapter N,#7ae3a4,0.12,Female genital prolapse
+26,Liver Disease,K72,Chapter K,#ce9765,0.12,"Hepatic failure, not elsewhere classified"
+27,GERD,K21,Chapter K,#0d7657,0.28,Gastro-esophageal reflux disease
+28,Irritable Bowel Syndrome,K58,Chapter K,#40c561,0.15,Irritable bowel syndrome
+29,Alzheimer Disease,G30,Chapter G,#13b4a0,0.06,Alzheimer's disease
+30,Parkinson Disease,G20,Chapter G,#20c895,0.02,Parkinson's disease
+31,Epilepsy,G40,Chapter G,#9d7dfd,0.01,Epilepsy and recurrent seizures
+32,Dermatitis,L30,Chapter L,#0df8cb,0.22,Other and unspecified dermatitis
+33,Psoriasis,L40,Chapter L,#0e1f47,0.03,Psoriasis
+34,Sepsis,A41,Chapter A,#28bed5,0.02,Other sepsis
+35,Viral Infections,B34,Chapter B,#80a66a,0.3,Viral infection of unspecified site
+36,Iron Deficiency Anemia,D50,Chapter D,#75f960,0.18,Iron deficiency anemia
+37,Other Anemias,D64,Chapter D,#781fce,0.12,Other anemias
+38,Cataract,H25,Chapter H,#ab1972,0.24,Age-related cataract
+39,Hearing Loss,H90,Chapter H,#910320,0.16,Conductive and sensorineural hearing loss
+40,Hip Fracture,S72,Chapter S,#bfbc05,0.05,Fracture of femur
+41,Head Injury,S06,Chapter S,#c33266,0.08,Intracranial injury
+42,Migraine,G43,Chapter G,#0b611f,0.14,Migraine
+43,Thyroid Disorders,E03,Chapter E,#879942,0.12,Other hypothyroidism
+44,Gastritis,K29,Chapter K,#10ee8b,0.2,Gastritis and duodenitis
+45,Pneumonia,J18,Chapter J,#f0b4df,0.08,"Pneumonia, unspecified organism"
+46,Appendicitis,K35,Chapter K,#793a11,0.04,Acute appendicitis
+47,Gallstones,K80,Chapter K,#bd04f2,0.1,Cholelithiasis
+48,Varicose Veins,I83,Chapter I,#cafa28,0.15,Varicose veins of lower extremities
+49,Hernias,K40,Chapter K,#37ef1a,0.08,Inguinal hernia
+50,Cataracts,H25,Chapter H,#a71661,0.24,Age-related cataract
+51,Glaucoma,H40,Chapter H,#17cb50,0.06,Glaucoma
+52,Tinnitus,H93,Chapter H,#6e7683,0.12,"Other disorders of ear, not elsewhere classified"
+53,Sleep Apnea,G47,Chapter G,#1dfb73,0.09,Sleep disorders
+54,Fibromyalgia,M79,Chapter M,#20e614,0.05,"Other and unspecified soft tissue disorders, not elsewhere classified"
+55,Lupus,M32,Chapter M,#5f21c7,0.002,Systemic lupus erythematosus (SLE)
+56,Multiple Sclerosis,G35,Chapter G,#0759c8,0.002,Multiple sclerosis
+57,Celiac Disease,K90,Chapter K,#9233da,0.01,Intestinal malabsorption
+58,Crohn Disease,K50,Chapter K,#0deac4,0.003,Crohn's disease [regional enteritis]
+59,Ulcerative Colitis,K51,Chapter K,#d827e0,0.005,Ulcerative colitis
+60,Psoriatic Arthritis,L40,Chapter L,#efad96,0.01,Psoriasis
+61,Endometriosis,N80,Chapter N,#663970,0.06,Endometriosis
+62,Polycystic Ovary,E28,Chapter E,#3d1c12,0.08,Ovarian dysfunction
+63,Benign Prostatic Hyperplasia,N40,Chapter N,#b6b2a7,0.25,Benign prostatic hyperplasia
+64,Osteoarthritis,M15,Chapter M,#c54eb1,0.35,Polyosteoarthritis
+65,Rheumatoid Arthritis,M05,Chapter M,#1fb9b0,0.008,Rheumatoid arthritis with rheumatoid factor
+66,Gout,M10,Chapter M,#fcad26,0.04,Gout
